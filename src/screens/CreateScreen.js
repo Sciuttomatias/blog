@@ -1,40 +1,20 @@
-import React, { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import { Context } from "../context/BlogContext";
+import React, { useContext } from 'react';
+import { StyleSheet } from 'react-native';
+import { Context } from '../context/BlogContext';
+import BlogPostForm from '../components/BlogPostForm';
 
 const CreateScreen = ({ navigation }) => {
-    // const { state } = useContext(Context);
+  const { addBlogPost } = useContext(Context);
 
-    // const blogPost = state.find(
-    //     blogPost => blogPost.id === navigation.getParam('id')
-    // );
-
-    return (
-        <View>
-            <Text>Enter Title</Text>
-            <TextInput />
-            <Text>Enter Content</Text>
-            <TextInput />
-        </View>
-    );
+  return (
+    <BlogPostForm
+      onSubmit={(title, content) => {
+        addBlogPost(title, content, () => navigation.navigate('Index'));
+      }}
+    />
+  );
 };
 
-const styles = StyleSheet.create({
-    row: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        borderTopWidth: 1,
-        borderColor: 'gray',
-    },
-    title: {
-        fontSize: 18,
-    },
-    trash: {
-        fontSize: 20,
-    },
-});
+const styles = StyleSheet.create({});
 
 export default CreateScreen;
